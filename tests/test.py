@@ -1,0 +1,1 @@
+from simpleckan.ckan import CKANInstance
