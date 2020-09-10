@@ -4,11 +4,16 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
+simple-ckan-macnetic = {editable = true, path = "."}
+pytest = "*"
+tox = "*"
+coverage = "*"
+pytest-cov = "*"
+pylint = "*"
 
 [packages]
 requests = "*"
-setuptools = "*"
-wheel = "*"
+simple-ckan-macnetic = {editable = true, path = "."}
 
 [requires]
 python_version = "3.8"

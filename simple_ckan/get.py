@@ -1,13 +1,5 @@
-from functools import wraps
+from .decorators import call_action
 
-def call_action(func):
-    @wraps(func)
-    def wrapper(*args, **kwargs):
-        payload = func(*args, **kwargs)
-        api_func = func.__name__
-        caller = payload.pop("self")
-        return caller.action.ckan.call_action(api_func, data=payload)
-    return wrapper
 
 class CKANGet(object):
     def __init__(self, action):
@@ -20,16 +12,16 @@ class CKANGet(object):
     ###############################################################################
 
     @call_action
-    def site_read(self): 
+    def site_read(self):
         return locals()
 
     @call_action
-    def package_list(self, limit:int=None, offset:int=None):
+    def package_list(self, limit: int = None, offset: int = None):
         # Not strictly necessary, the input will be checked server-side anyway.
-        if (limit is not None) and (offset is None):
-            raise ValueError("offset is undefined.")
-        if (limit < 0) or (offset < 0):
-            raise ValueError("limit and offset cannot be negative.")
+        # if (limit is not None) and (offset is None):
+        #     raise ValueError("offset is undefined.")
+        # if (limit < 0) or (offset < 0):
+        #     raise ValueError("limit and offset cannot be negative.")
         return locals()
 
     @call_action
@@ -37,7 +29,7 @@ class CKANGet(object):
         return locals()
 
     @call_action
-    def member_list(self, id:str, object_type:str=None, capacity:str=None):
+    def member_list(self, id: str, object_type: str = None, capacity: str = None):
         return locals()
 
     @call_action
@@ -47,13 +39,38 @@ class CKANGet(object):
     @call_action
     def package_collaborator_list_for_user(self, id, capacity=None):
         return locals()
-    
+
     @call_action
-    def group_list(self, sort:str=None, limit:int=None, offset:int=None, groups=None, all_fields=False, include_dataset_count=False, include_extras=False, include_tags=False, include_users=False):
+    def group_list(
+        self,
+        sort: str = None,
+        limit: int = None,
+        offset: int = None,
+        groups=None,
+        all_fields=False,
+        include_dataset_count=False,
+        include_extras=False,
+        include_tags=False,
+        include_users=False,
+    ):
         return locals()
 
     @call_action
-    def organization_list(self, *, order_by=None, sort=None, limit=None, offset=None, organizations=None, all_fields=None, include_dataset_count=None, include_extras=None, include_tags=None, include_groups=None, include_users=None):
+    def organization_list(
+        self,
+        *,
+        order_by=None,
+        sort=None,
+        limit=None,
+        offset=None,
+        organizations=None,
+        all_fields=None,
+        include_dataset_count=None,
+        include_extras=None,
+        include_tags=None,
+        include_groups=None,
+        include_users=None
+    ):
         return locals()
 
     @call_action
@@ -77,11 +94,31 @@ class CKANGet(object):
         return locals()
 
     @call_action
-    def group_show(self, id, include_datasets=None, include_dataset_count=None, include_extras=None, include_users=None, include_groups=None, include_tags=None, include_followers=None):
+    def group_show(
+        self,
+        id,
+        include_datasets=None,
+        include_dataset_count=None,
+        include_extras=None,
+        include_users=None,
+        include_groups=None,
+        include_tags=None,
+        include_followers=None,
+    ):
         return locals()
-    
+
     @call_action
-    def organization_show(self, id, include_datasets=None, include_dataset_count=None, include_extras=None, include_users=None, include_groups=None, include_tags=None, include_followers=None):
+    def organization_show(
+        self,
+        id,
+        include_datasets=None,
+        include_dataset_count=None,
+        include_extras=None,
+        include_users=None,
+        include_groups=None,
+        include_tags=None,
+        include_followers=None,
+    ):
         return locals()
 
     @call_action
@@ -105,11 +142,26 @@ class CKANGet(object):
         return locals()
 
     @call_action
-    def package_search(self, q, fq=None, fq_list=None, sort=None, rows=None, start=None, facet=None, facet_mincount=None, facet_limit=None, facet_field=None, include_drafts=None, include_private=None, use_default_schema=None):
+    def package_search(
+        self,
+        q,
+        fq=None,
+        fq_list=None,
+        sort=None,
+        rows=None,
+        start=None,
+        facet=None,
+        facet_mincount=None,
+        facet_limit=None,
+        facet_field=None,
+        include_drafts=None,
+        include_private=None,
+        use_default_schema=None,
+    ):
         return locals()
 
-    @call_action 
-    def resource_search(self, q:str, order_by=None, limit=None, offset=None):
+    @call_action
+    def resource_search(self, q: str, order_by=None, limit=None, offset=None):
         # q is a string on the form f"{field}:{term}" or a list of string on the same form, e.g. "field1:term1"
         # It can probably be written a bit more elegantly
         return locals()
